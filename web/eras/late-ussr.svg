@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Поздний СССР — свет большого двора</title>
+  <desc id="desc">Авторская стилизация: модернистские дома, берёзы, мозаичное солнце и спутник на фоне тихого городского пейзажа.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#9cb6ba"/><stop offset="1" stop-color="#eee6c8"/></linearGradient>
+    <pattern id="windows" width="43" height="48" patternUnits="userSpaceOnUse"><path d="M8 9h25v29H8z" fill="#718d88"/><path d="M10 11h10v25H10z" fill="#cad3b7"/><path d="M0 47h43" stroke="#bbbca3"/></pattern>
+    <pattern id="mosaic" width="15" height="15" patternUnits="userSpaceOnUse"><path d="M1 1h12v12H1z" fill="none" stroke="#fff4d9" stroke-opacity=".2"/></pattern>
+    <g id="birch"><path d="M0 0l7-301M7-153l-43-71M6-208l42-67" stroke="#e9e8cd" stroke-width="11" fill="none"/><path d="M-3-45h13m-11-41h14m-10-48h12m-10-110h13" stroke="#687d6b" stroke-width="4"/><g fill="#8f9f72"><ellipse cx="-31" cy="-249" rx="57" ry="68"/><ellipse cx="36" cy="-292" rx="52" ry="76"/><ellipse cx="-4" cy="-330" rx="50" ry="72"/></g><g fill="#b0b77b"><ellipse cx="-46" cy="-273" rx="28" ry="42"/><ellipse cx="18" cy="-342" rx="27" ry="43"/></g></g>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1200v800H0z"/>
+  <circle cx="888" cy="208" r="125" fill="#d6a66a"/><circle cx="888" cy="208" r="125" fill="url(#mosaic)"/>
+  <g fill="none" stroke="#f5eed7" stroke-width="4" opacity=".7"><path d="M0 181q350-180 660 14t540-40"/><ellipse cx="390" cy="190" rx="184" ry="58" transform="rotate(-27 390 190)"/></g>
+  <g transform="translate(385 190) rotate(-27)" stroke="#647c78" stroke-width="4"><circle r="19" fill="#cad4c9"/><path d="M-16 12l-77 28m80-46l-40-57m55 78l21 73m-10-78l56 49"/></g>
+  <path d="M0 470q320-50 590 0t610-15v345H0z" fill="#b4c0a3"/>
+  <g stroke="#8d9c8a" stroke-width="3"><path d="M175 501V278h274v223" fill="#d8d9bf"/><path d="M187 294h249v195H187z" fill="url(#windows)"/><path d="M483 514V209h142v305" fill="#eee5c9"/><path d="M496 224h116v278H496z" fill="url(#windows)"/><path d="M669 523V329h309v194" fill="#d7d4b7"/><path d="M681 344h285v166H681z" fill="url(#windows)"/><path d="M161 278h302m10-70h162m23 121h332" stroke="#6a8680" stroke-width="11"/></g>
+  <path d="M0 675q331-45 596-93t604 16v202H0z" fill="#d6cfaf"/>
+  <path d="M0 740q340-110 610-109t590-80" stroke="#edf0d5" stroke-width="48" fill="none"/>
+  <use href="#birch" transform="translate(99 626) scale(1.3)"/><use href="#birch" transform="translate(1080 655) scale(1.5)"/>
+  <g transform="translate(706 586)" stroke="#617b69" stroke-width="7"><path d="M0 0h175m-174 24h175m-154 0v35m135-35v35m-147-59v-29m157 29v-29"/><path d="M0-17h175" stroke="#a68a5f" stroke-width="26"/></g>
+  <path d="M0 757q250-38 480 7t720-36v72H0z" fill="#7d9571"/>
+  <path d="M24 24h1152v752H24z" fill="none" stroke="#f1edcf" stroke-width="3"/>
+</svg>

@@ -1,0 +1,49 @@
+name: Desktop checks and native builds
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+concurrency:
+  group: desktop-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            bundles: nsis
+            artifact: windows-x64
+          - os: macos-latest
+            bundles: dmg
+            artifact: macos-native
+          - os: ubuntu-22.04
+            bundles: deb,appimage
+            artifact: linux-x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev patchelf
+      - run: npm ci
+      - run: npm run check:publication
+      - run: npm test
+      - run: cargo fmt --manifest-path src-tauri/Cargo.toml -- --check
+      - run: cargo test --locked --manifest-path src-tauri/Cargo.toml
+      - run: npm run build -- --bundles ${{ matrix.bundles }}
+        env:
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: family-atlas-${{ matrix.artifact }}
+          path: src-tauri/target/release/bundle/
+          if-no-files-found: error
+          retention-days: 14

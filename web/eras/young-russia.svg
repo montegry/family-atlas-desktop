@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Молодая РФ — город на рубеже веков</title>
+  <desc id="desc">Авторская стилизация: пастельный городской вечер, троллейбус, дома разных лет и огни окон у набережной.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#a4a8bd"/><stop offset=".55" stop-color="#e0bbab"/><stop offset="1" stop-color="#eee0c3"/></linearGradient>
+    <linearGradient id="river" x2="0" y2="1"><stop stop-color="#a6b9b5"/><stop offset="1" stop-color="#d0c9b6"/></linearGradient>
+    <pattern id="windows" width="40" height="42" patternUnits="userSpaceOnUse"><path d="M8 8h23v26H8z" fill="#899a9d"/><path d="M11 11h8v20h-8z" fill="#e4c392"/></pattern>
+    <g id="lamp" fill="none" stroke="#677f79" stroke-width="7"><path d="M0 0v-185q0-20 23-20h30m-3 0v14"/><path d="M34-186h36l-8 25H42z" fill="#e9d5a5" stroke-width="3"/></g>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1200v800H0z"/><circle cx="220" cy="216" r="101" fill="#edcfb0" opacity=".72"/>
+  <g fill="#929fa3" opacity=".35"><path d="M0 408V289h118v119h47V242h122v166h57V302h127v106h232V275h102v133h74V239h143v169h178v200H0z"/></g>
+  <g stroke="#9b9f91" stroke-width="3"><path d="M114 499V325h243v174" fill="#e2cfaf"/><path d="M102 326l38-40h191l38 40z" fill="#7c8b85"/><path d="M134 342h206v143H134z" fill="url(#windows)"/><path d="M386 502V258h165v244" fill="#b4beb5"/><path d="M402 271h133v217H402z" fill="url(#windows)"/><path d="M584 507V349h269v158" fill="#dfbea1"/><path d="M574 348l144-43 148 43z" fill="#a17d74"/><path d="M603 363h232v131H603z" fill="url(#windows)"/><path d="M897 509V225h153v284" fill="#d2d4c4"/><path d="M914 242h119v253H914z" fill="url(#windows)"/><path d="M896 225l76-37 79 37" fill="#778f8d"/></g>
+  <path d="M0 519h1200v107H0z" fill="#aeb4a5"/>
+  <path d="M0 550h1200m-1200 45h1200" stroke="#e2dbbf" stroke-width="3"/>
+  <g transform="translate(446 477)" stroke="#627e79" stroke-width="3"><path d="M0 0h285q15 0 15 20v75H-8V19Q-8 0 0 0" fill="#e7ddc3"/><path d="M2 15h282v35H2z" fill="#9db0af"/><path d="M-7 61h306v20H-7z" fill="#729587" stroke="none"/><path d="M42 14v36m43-36v36m43-36v36m43-36v36m43-36v36m43-36v36"/><path d="M68 0l-55-96m186 96l-54-93" fill="none"/><circle cx="43" cy="96" r="15" fill="#5c736e"/><circle cx="251" cy="96" r="15" fill="#5c736e"/></g>
+  <path d="M0 362l1200 59M0 390l1200 59" stroke="#718b86" stroke-width="2"/>
+  <path d="M0 646q360-26 644 4t556-8v158H0z" fill="url(#river)"/>
+  <path d="M0 653q370-26 650 4t550-8" stroke="#e9e3cb" stroke-width="15" fill="none"/>
+  <g stroke="#eadbc0" stroke-width="4" opacity=".8"><path d="M140 692h245m166 35h330m-487 40h260m285-72h170"/></g>
+  <use href="#lamp" transform="translate(111 625)"/><use href="#lamp" transform="translate(1061 624)"/>
+  <g fill="#728c76"><path d="M0 531q59-99 126-2v105H0zM1090 520q62-98 110 2v125h-110z"/><path d="M0 771q310-24 526 29H0z"/></g>
+  <path d="M26 26h1148v748H26z" fill="none" stroke="#eee3cc" stroke-width="3"/>
+</svg>

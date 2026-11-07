@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Ранний СССР — геометрия времени</title>
+  <desc id="desc">Авторская стилизация: конструктивистская архитектура, трамвай, индустриальный силуэт и фактура печатной бумаги.</desc>
+  <defs>
+    <linearGradient id="paper" x2="0" y2="1"><stop stop-color="#e9dfc8"/><stop offset="1" stop-color="#c5baa1"/></linearGradient>
+    <pattern id="grain" width="9" height="8" patternUnits="userSpaceOnUse"><path d="M1 1h2m3 4h2M0 7h1" stroke="#6c6251" stroke-opacity=".13"/></pattern>
+    <pattern id="glass" width="40" height="36" patternUnits="userSpaceOnUse"><path d="M4 4h30v25H4z" fill="#879c95"/><path d="M19 4v25" stroke="#d9d8c5" stroke-width="3"/></pattern>
+  </defs>
+  <path fill="url(#paper)" d="M0 0h1200v800H0z"/>
+  <path d="M0 350L680 0h400L0 570z" fill="#a44d3d" opacity=".83"/>
+  <circle cx="940" cy="198" r="123" fill="#e8ba7c"/>
+  <path d="M940 20v356M762 198h356" stroke="#f4ead0" stroke-width="2" opacity=".6"/>
+  <path d="M0 578V457h122v-65h47v187h155V468l61-28 69 28v111h500V411h104v-69h62v237h80v89H0z" fill="#8b9286" opacity=".55"/>
+  <g stroke="#565f58" stroke-width="3"><path d="M207 564V326h324v238" fill="#cec9b2"/><path d="M190 331h350v-47H190z" fill="#586e65"/><path d="M233 350h271v177H233z" fill="url(#glass)"/><path d="M510 565V198h144v367" fill="#e5d9ba"/><path d="M508 204h150v-24H508z" fill="#a3503e"/><path d="M534 225h93v223h-93z" fill="url(#glass)"/><path d="M630 565V382q169-100 337 0v183z" fill="#d7c9aa"/><path d="M653 414q146-76 291 0v78H653z" fill="url(#glass)"/><path d="M648 510h300M647 532h302" fill="none" stroke="#b19d7d" stroke-width="8"/><path d="M564 565v-77h43v77" fill="#6a7a6e"/></g>
+  <g stroke="#6a776e" fill="none"><path d="M0 620h1200M0 644h1200" stroke-width="5"/><path d="M0 155l1200 140M0 226l1200 63" stroke-width="2"/><path d="M115 143v490m962-354v352" stroke-width="7"/></g>
+  <g transform="translate(312 520)"><path d="M0 0h262q22 0 22 27v58H-8V27Q-8 0 0 0" fill="#9d4d3d" stroke="#655c4c" stroke-width="4"/><path d="M5 14h258v33H5z" fill="#bdc7b6"/><path d="M42 13v35m45-35v35m45-35v35m45-35v35m45-35v35" stroke="#626e60" stroke-width="5"/><path d="M-8 60h291" stroke="#ebd8b5" stroke-width="7"/><path d="M103 0l43-34 52 34" fill="none" stroke="#5d695f" stroke-width="4"/><circle cx="40" cy="86" r="14" fill="#515c54"/><circle cx="227" cy="86" r="14" fill="#515c54"/></g>
+  <path d="M0 692l1200-43v151H0z" fill="#586c5f"/>
+  <path d="M68 727h417m51-20h300m-560 50h450" stroke="#b7b797" stroke-width="3" opacity=".55"/>
+  <path d="M30 30h1140v740H30z" fill="none" stroke="#6f7864" stroke-width="2"/>
+  <path fill="url(#grain)" d="M0 0h1200v800H0z"/>
+</svg>

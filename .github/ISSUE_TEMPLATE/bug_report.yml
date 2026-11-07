@@ -1,0 +1,41 @@
+name: Ошибка в приложении
+description: Сообщить о проблеме на вымышленных данных
+title: "[Ошибка] "
+body:
+  - type: markdown
+    attributes:
+      value: "Не прикладывайте настоящие семейные базы, фотографии, экспорты и неотредактированные скриншоты. Для уязвимостей смотрите SECURITY.md."
+  - type: input
+    id: version
+    attributes:
+      label: Версия приложения
+      placeholder: "Например, 0.1.0 или commit ID"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: ОС и архитектура
+      placeholder: "Например, Windows 11 x64"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Как воспроизвести
+      description: Минимальные шаги на вымышленном дереве
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Ожидаемый и фактический результат
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Конфиденциальность
+      options:
+        - label: В сообщении и вложениях нет реальных семейных данных, секретов и личных фотографий.
+          required: true

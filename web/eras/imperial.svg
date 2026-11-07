@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Императорская Россия — сад воспоминаний</title>
+  <desc id="desc">Авторская стилизация: дворец у реки, липовые ветви, кованая ограда и тёплая архивная бумага.</desc>
+  <defs>
+    <linearGradient id="paper" x2="0" y2="1"><stop stop-color="#ede2c7"/><stop offset="1" stop-color="#c5b38a"/></linearGradient>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#adbbb0"/><stop offset="1" stop-color="#f4e9cf"/></linearGradient>
+    <linearGradient id="river" x2="0" y2="1"><stop stop-color="#a3b8ab"/><stop offset="1" stop-color="#e0d5b8"/></linearGradient>
+    <pattern id="grain" width="7" height="9" patternUnits="userSpaceOnUse"><path d="M0 2h2m3 4h2M2 8h1" stroke="#756d51" stroke-opacity=".12"/></pattern>
+    <pattern id="windows" width="48" height="65" patternUnits="userSpaceOnUse"><path d="M10 47V22q9-18 18 0v25z" fill="#6c8176" stroke="#ece1c1" stroke-width="5"/><path d="M19 14v32m-8-18h16" stroke="#d6c9a9" stroke-width="2"/></pattern>
+    <g id="tree"><path d="M0 0q25-120 3-250m7 115q-45-20-59-62m59 20q40-17 57-59" fill="none" stroke="#686f4b" stroke-width="9"/><g fill="#7e8b60"><ellipse cx="-29" cy="-202" rx="54" ry="65"/><ellipse cx="29" cy="-260" rx="52" ry="72"/><ellipse cx="56" cy="-187" rx="50" ry="62"/><ellipse cx="-18" cy="-286" rx="43" ry="51"/></g><g fill="#a4aa76" opacity=".8"><ellipse cx="-50" cy="-227" rx="29" ry="39"/><ellipse cx="16" cy="-299" rx="28" ry="37"/></g></g>
+  </defs>
+  <path fill="url(#paper)" d="M0 0h1200v800H0z"/><path fill="url(#sky)" d="M35 35h1130v530H35z"/>
+  <circle cx="810" cy="190" r="93" fill="#f5e8c2" opacity=".65"/>
+  <path d="M0 460q210-93 410-29t390-20 400 30v170H0z" fill="#a7ad90"/>
+  <g stroke="#8c9179" stroke-width="3"><path d="M248 480V326h280v154m144 0V326h280v154" fill="#d7d2b4"/><path d="M225 326h320l-24-26H250zm432 0h320l-24-26H682z" fill="#6e8277"/><path d="M512 484V291h176v193" fill="#e5ddbf"/><path d="M497 295l103-67 103 67z" fill="#ced1b7"/><path d="M549 236q-2-77 51-91 53 14 51 91" fill="#899a87"/><path d="M600 149v-47m-13 16h26" fill="none" stroke="#a89254"/><path d="M267 343h243v130H267zm423 0h243v130H690z" fill="url(#windows)"/><path d="M551 322h98v154h-98z" fill="url(#windows)"/><path d="M235 486h729m-694-90h242m176 0h252" fill="none" stroke="#f5ecd2" stroke-width="7"/><path d="M521 476h157l36 23H485z" fill="#aaa98b"/></g>
+  <path fill="url(#river)" d="M0 532q310-38 602 3t598-10v227H0z"/>
+  <g stroke="#e9e1c8" fill="none" opacity=".6"><path d="M280 572h330m60 14h280M182 626h473m-70 34h390m-640 35h350" stroke-width="5"/><path d="M435 550h300m-390 48h240m160 39h290" stroke-width="2"/></g>
+  <use href="#tree" transform="translate(116 556) scale(1.3)"/><use href="#tree" transform="translate(1094 570) scale(1.55)"/>
+  <path d="M0 707q307-82 600-4t600-22v119H0z" fill="#929b74"/>
+  <g fill="none" stroke="#687a64" stroke-width="5"><path d="M55 741h1090M55 720h1090"/><path d="M100 760v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79m50 0v-79q15-28 30 0v79"/></g>
+  <path d="M23 23h1154v754H23zM35 35h1130v730H35z" stroke="#a99561" fill="none" stroke-width="2"/>
+  <path fill="url(#grain)" d="M0 0h1200v800H0z"/>
+</svg>

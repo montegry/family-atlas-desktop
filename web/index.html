@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Семейный атлас — история в лицах</title>
+  <link rel="icon" href="/app-icon.png" type="image/png">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/photo-editor.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">♧</span><div><h1>Семейный атлас</h1><p>ИСТОРИЯ, КОТОРАЯ НАС ОБЪЕДИНЯЕТ</p></div></div>
+    <div class="header-actions"><span id="save-status" class="status">SQLite · запуск…</span><details class="file-menu"><summary class="button quiet">Файлы</summary><div><button id="import-button">Импорт JSON / GEDCOM</button><button id="import-project">Перенести проект с фотографиями</button><button id="export-json">Сохранить JSON…</button><button id="export-ged">Сохранить GEDCOM…</button><button id="export-project">Полная копия с фотографиями…</button><button id="storage-info">Расположение данных</button></div></details><button id="new-person" class="primary">+ Человек</button></div>
+  </header>
+  <main>
+    <aside class="directory">
+      <div class="directory-heading"><h2>Люди и связи</h2><span id="people-count" class="badge">—</span></div>
+      <label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Имя, фамилия, место…" aria-label="Найти человека"></label>
+      <div class="directory-meta"><span>СЕМЕЙНЫЙ АРХИВ</span><button id="show-all" class="text-button">Все линии ↗</button></div>
+      <div id="people-list" class="people-list"></div>
+      <div class="directory-footer"><span class="privacy-dot"></span> Только на этом компьютере<br><small>Исходный файл остаётся неизменным</small></div>
+    </aside>
+    <section class="canvas-section" aria-label="Генеалогическое древо">
+      <div class="canvas-toolbar"><div><span class="eyebrow">ЖИВАЯ ИСТОРИЯ СЕМЬИ</span><h2 id="tree-title">Наше древо</h2><p id="tree-description">Загрузка семейной истории…</p></div><div class="view-switch" aria-label="Направление дерева"><button id="descendants" class="active" aria-pressed="true">Потомки ↓</button><button id="ancestors" aria-pressed="false">Предки ↑</button><button id="both" aria-pressed="false">Предки и потомки ↕</button></div></div>
+      <div id="viewport" class="viewport" tabindex="0" aria-label="Древо: перетаскивайте фон, масштабируйте колёсиком; клавиши плюс, минус и стрелки"><div id="tree-background" aria-hidden="true"></div><div id="world"><svg id="connections" aria-hidden="true"></svg><div id="nodes"></div></div><div id="empty-state" hidden>Никого не найдено</div></div>
+      <div class="canvas-bottom"><div class="legend"><span class="legend-person"></span> Человек <span class="legend-family"></span> Семья <span id="visible-count"></span></div><div class="zoom-controls"><button id="collapse-all" title="Свернуть до первого поколения">Свернуть</button><button id="expand-all" title="Раскрыть все ветки">Раскрыть</button><span class="divider"></span><button id="zoom-out" aria-label="Уменьшить">−</button><span id="zoom-value">100%</span><button id="zoom-in" aria-label="Увеличить">+</button><button id="fit" title="Показать дерево целиком" aria-label="Вместить дерево">⛶</button></div></div>
+      <div class="canvas-hint">Перетаскивайте фон · Колёсико — масштаб · Нажмите на карточку для редактирования <button id="poster-button" type="button">✧ Семейный плакат</button></div>
+    </section>
+    <aside id="detail" class="detail" hidden aria-label="Карточка записи"></aside>
+  </main>
+  <div id="toast" role="status" hidden></div>
+  <dialog id="photo-dialog"><button id="close-photo" aria-label="Закрыть фотографию">×</button><img id="large-photo" alt="Семейная фотография"></dialog>
+  <dialog id="relative-dialog" aria-label="Добавление родственника"><div id="relative-content"></div></dialog>
+  <dialog id="poster-dialog" aria-labelledby="poster-heading">
+    <div class="poster-heading"><div><span class="eyebrow">СЕМЕЙНАЯ ЛЕТОПИСЬ</span><h2 id="poster-heading">Художественный плакат</h2></div><button id="poster-close" type="button" aria-label="Закрыть предпросмотр плаката">×</button></div>
+    <p class="poster-explanation">Текущая раскрытая ветвь целиком на вашем фоне, включая супругов и карточки за краями экрана. Центр, направление и свёрнутые ветви сохранены. <strong>Без дат.</strong> Фон встраивается в SVG и PNG; пропорции изображения сохранены, края могут обрезаться.</p>
+    <label for="poster-title">Заголовок плаката</label><input id="poster-title" maxlength="100" value="История нашей семьи">
+    <div class="poster-actions"><button id="poster-svg" type="button" class="primary" data-poster-download>↓ SVG для печати</button><button id="poster-png" type="button" data-poster-download>↓ PNG</button><span>Всё локально · фото без внешней загрузки</span></div>
+    <div class="poster-preview-area"><img id="poster-preview" alt="Предпросмотр семейного плаката без дат"></div>
+    <p id="poster-status" role="status"></p>
+    <p class="poster-footnote">SVG содержит фотографии внутри файла. PNG — до 4096 пикселей по длинной стороне. Нет фото — декоративный силуэт, не выдуманный портрет. Файл может содержать сведения о живых родственниках: перед передачей проверьте состав ветви.</p>
+  </dialog>
+</body>
+</html>

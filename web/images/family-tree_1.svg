@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title description">
+  <title id="title">Древо семьи</title>
+  <desc id="description">Стилизованный старый дуб с широкой кроной, переплетёнными ветвями и сильными корнями. Авторская векторная иллюстрация без надписей.</desc>
+  <defs>
+    <linearGradient id="trunk" x1="0" x2="1" y2=".4"><stop stop-color="#6f7754"/><stop offset=".45" stop-color="#ae9671"/><stop offset=".75" stop-color="#8c8960"/><stop offset="1" stop-color="#657656"/></linearGradient>
+    <linearGradient id="crown" x2=".2" y2="1"><stop stop-color="#b2bf86"/><stop offset=".55" stop-color="#859d6d"/><stop offset="1" stop-color="#52755a"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#d5d3a4" stop-opacity=".6"/><stop offset="1" stop-color="#d5d3a4" stop-opacity="0"/></radialGradient>
+    <g id="leaf"><path d="M0 0C-28-22-28-55 0-76 28-55 28-22 0 0" fill="currentColor"/><path d="M0-7v-56m0 32l-12-12M0-23l12-14" stroke="#ebecd0" stroke-width="2" fill="none" opacity=".45"/></g>
+    <g id="sprig" fill="none" stroke="#667c55" stroke-width="3" stroke-linecap="round"><path d="M0 0q-9-65 9-119"/><use href="#leaf" transform="translate(2 -20) rotate(-57) scale(.55)" color="#829d64" stroke="none"/><use href="#leaf" transform="translate(0 -47) rotate(48) scale(.65)" color="#a4b77b" stroke="none"/><use href="#leaf" transform="translate(3 -78) rotate(-34) scale(.55)" color="#718e61" stroke="none"/><use href="#leaf" transform="translate(8 -103) rotate(13) scale(.5)" color="#b9c487" stroke="none"/></g>
+    <g id="foliage"><path d="M-120 29c-57-8-65-64-26-91-9-43 26-79 71-68 20-53 78-57 104-12 47-24 93 5 84 47 56 0 79 52 43 85 28 49-19 85-61 69-20 37-73 39-99 8-45 27-88 5-87-32z" fill="url(#crown)"/><path d="M-94-45c-35-23-11-65 25-60 23-37 68-34 78-5 38-19 78 7 59 37-37-17-65 8-88-3-23-15-50-5-74 31" fill="#c5cc9a" opacity=".48"/><use href="#sprig" transform="translate(-40 36) rotate(-22) scale(.78)"/><use href="#sprig" transform="translate(57 28) rotate(32) scale(.65)"/></g>
+  </defs>
+  <ellipse cx="800" cy="572" rx="745" ry="520" fill="url(#halo)"/>
+  <g opacity=".84">
+    <use href="#foliage" transform="translate(272 470) rotate(-24) scale(1.12)"/>
+    <use href="#foliage" transform="translate(342 307) rotate(-19) scale(1.25)"/>
+    <use href="#foliage" transform="translate(527 207) rotate(-10) scale(1.25)"/>
+    <use href="#foliage" transform="translate(731 165) scale(1.2)"/>
+    <use href="#foliage" transform="translate(938 183) rotate(13) scale(1.32)"/>
+    <use href="#foliage" transform="translate(1152 283) rotate(19) scale(1.25)"/>
+    <use href="#foliage" transform="translate(1316 433) rotate(32) scale(1.13)"/>
+    <use href="#foliage" transform="translate(1198 557) rotate(22) scale(1.12)"/>
+    <use href="#foliage" transform="translate(1001 416) rotate(6) scale(1.3)"/>
+    <use href="#foliage" transform="translate(777 353) scale(1.35)"/>
+    <use href="#foliage" transform="translate(550 400) rotate(-9) scale(1.28)"/>
+    <use href="#foliage" transform="translate(394 562) rotate(-25) scale(1.05)"/>
+  </g>
+  <g fill="none" stroke="url(#trunk)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M801 932q-35-174 4-322 22-99-3-190" stroke-width="104"/>
+    <path d="M791 712Q696 570 539 522T280 456" stroke-width="48"/>
+    <path d="M804 650Q946 521 1092 505t235-81" stroke-width="43"/>
+    <path d="M789 584Q690 439 602 340T478 207" stroke-width="34"/>
+    <path d="M809 527Q908 396 1007 294t111-77" stroke-width="32"/>
+    <path d="M802 445q-21-105-65-218" stroke-width="25"/>
+    <path d="M650 555Q567 483 487 476t-123-38m229 87Q521 449 523 365m-86 135q-15-68-96-104" stroke-width="18"/>
+    <path d="M948 553q72-98 164-156m-31 108q89 19 166-21m-100-7q39-79 36-130" stroke-width="17"/>
+    <path d="M655 412q-9-91 17-156m-76 78q-71-31-113-83m447 124q80-7 128-61m-34-38q-5-62 32-101" stroke-width="14"/>
+    <path d="M791 778q-95-121-183-121t-142-35m341 129q92-111 180-115t181-50" stroke-width="29"/>
+    <path d="M615 656q-20-63-73-84m452 65q31-61 107-82" stroke-width="12"/>
+  </g>
+  <path d="M755 820q20-85 13-158c18 52 11 100 0 148-18 75 1 112 35 140l-43 5q-34-66-5-135m56-23q-15-98 19-168-16 101 9 167 32 87 0 156l-23-2q24-74-5-153" fill="#d2b78a" opacity=".58"/>
+  <g stroke="#5f7452" fill="none" stroke-linecap="round" opacity=".65"><path d="M789 910q-28-91 9-192m26 214q31-94-3-160m-59 107q-11-56 4-105m51-89q2-63-14-115" stroke-width="5"/><path d="M714 606q-65-65-148-65m325 16q69-46 129-43m-289-83q-42-65-86-101m218 105q43-62 95-104" stroke-width="4"/></g>
+  <g fill="url(#trunk)">
+    <path d="M752 900c-37 69-105 72-177 96l-144 33c96 7 170-8 232-24-27 28-61 47-101 65 93-5 139-53 190-67 7 26-16 50-40 69 66-10 86-55 91-79 42 18 84 53 133 54-32-22-48-45-59-69 64 24 129 44 240 41l-145-39c-71-26-116-37-132-80z"/>
+    <path d="M783 936q-86-25-145-5l-75 19q94-4 157 10m101-26q86-17 128 7l79 24q-84-11-156-8"/>
+  </g>
+  <g opacity=".72">
+    <use href="#sprig" transform="translate(231 462) rotate(-71) scale(1.1)"/>
+    <use href="#sprig" transform="translate(315 375) rotate(-34) scale(.9)"/>
+    <use href="#sprig" transform="translate(483 259) rotate(-38) scale(.85)"/>
+    <use href="#sprig" transform="translate(674 270) rotate(14) scale(.92)"/>
+    <use href="#sprig" transform="translate(741 215) rotate(-17) scale(1.04)"/>
+    <use href="#sprig" transform="translate(1044 239) rotate(34) scale(.94)"/>
+    <use href="#sprig" transform="translate(1179 365) rotate(42) scale(1.1)"/>
+    <use href="#sprig" transform="translate(1311 447) rotate(64) scale(.94)"/>
+    <use href="#sprig" transform="translate(1156 585) rotate(86) scale(.85)"/>
+    <use href="#sprig" transform="translate(460 618) rotate(-83) scale(.82)"/>
+  </g>
+  <g fill="none" stroke="#829769" stroke-width="3" stroke-linecap="round" opacity=".6"><path d="M341 1021q-4-29-19-44m29 42q9-32 24-39m814 41q-1-30 18-47m-8 53q14-24 35-30m-813 13q-9-21-24-29m790 31q-3-21 11-40"/><path d="M277 1041q237-34 410-4m236 1q164-25 400 9" stroke-width="2"/></g>
+</svg>

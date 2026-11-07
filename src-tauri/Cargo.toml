@@ -1,0 +1,29 @@
+[package]
+name = "family-atlas-desktop"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+description = "Offline family history editor"
+license = "MIT"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+rusqlite = { version = "0.38", features = ["bundled", "backup"] }
+sha2 = "0.10"
+base64 = "0.22"
+chrono = "0.4"
+anyhow = "1"
+rfd = "0.15"
+open = "5"
+
+[dev-dependencies]
+tempfile = "3"
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]

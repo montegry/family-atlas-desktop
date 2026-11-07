@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS people (id TEXT PRIMARY KEY, position INTEGER NOT NULL, payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS families (id TEXT PRIMARY KEY, position INTEGER NOT NULL, payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS family_members (family_id TEXT NOT NULL REFERENCES families(id) ON DELETE CASCADE, person_id TEXT NOT NULL REFERENCES people(id), role TEXT NOT NULL CHECK(role IN ('husband','wife','child')), position INTEGER NOT NULL, PRIMARY KEY(family_id,role,position), UNIQUE(family_id,person_id));
+CREATE UNIQUE INDEX IF NOT EXISTS one_partner_role ON family_members(family_id,role) WHERE role != 'child';
+CREATE TABLE IF NOT EXISTS names (person_id TEXT REFERENCES people(id) ON DELETE CASCADE, position INTEGER NOT NULL, payload TEXT NOT NULL, PRIMARY KEY(person_id,position));
+CREATE TABLE IF NOT EXISTS events (person_id TEXT REFERENCES people(id) ON DELETE CASCADE, position INTEGER NOT NULL, payload TEXT NOT NULL, PRIMARY KEY(person_id,position));
+CREATE TABLE IF NOT EXISTS media (person_id TEXT REFERENCES people(id) ON DELETE CASCADE, position INTEGER NOT NULL, path TEXT NOT NULL, PRIMARY KEY(person_id,position));
+CREATE TABLE IF NOT EXISTS sources (id TEXT PRIMARY KEY, position INTEGER NOT NULL, payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS assertions (position INTEGER PRIMARY KEY, payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS extensions (position INTEGER PRIMARY KEY, payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS history (sequence INTEGER PRIMARY KEY, timestamp TEXT NOT NULL, action TEXT NOT NULL, previous_revision TEXT, revision TEXT NOT NULL);

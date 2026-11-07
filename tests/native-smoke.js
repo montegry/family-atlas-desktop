@@ -1,0 +1,75 @@
+// Executed by the real WebView only with explicit debug-only test environment.
+(async()=>{
+  const invoke=window.__TAURI__.core.invoke,results=[];
+  const check=(ok,label)=>{if(!ok)throw new Error(label);results.push(label);};
+  try{
+    const wait=async p=>{const start=Date.now();while(!await p()){if(Date.now()-start>15000)throw new Error('UI timeout');await new Promise(r=>setTimeout(r,40));}};
+    await wait(()=>document.querySelector('#save-status').textContent.includes('SQLite'));
+    let tree=await invoke('get_tree');
+    const save=async action=>tree=await invoke('apply_action',{action:{...action,revision:tree.revision}});
+    await save({type:'person',values:{given:'Тестовый Иван',surname:'Проверкин',birth:'21 MAR 19'}});
+    const root=tree.editedId;
+    check(tree.people[root].birth==='21 MAR 19','Original unusual date preserved');
+    await save({type:'addRelative',id:root,values:{relationship:'wife',person:{given:'Мария',sex:'F'}}});
+    const fid=Object.values(tree.families).find(f=>f.husband===root).id;
+    await save({type:'addRelative',id:root,values:{relationship:'child',familyId:fid,person:{given:'Ребёнок'}}});
+    check(Object.keys(tree.people).length===3&&tree.families[fid].children.length===1,'Atomic spouse and child creation');
+    const stale=tree.revision;await save({type:'person',id:root,values:{...tree.people[root],awards:'Тестовая награда'}});
+    try{await invoke('apply_action',{action:{type:'person',revision:stale,values:{given:'Must fail'}}});throw new Error('Conflict accepted');}catch(e){check(String(e).includes('другом окне'),'Stale revision rejected');}
+    const fixture=document.createElement('canvas');fixture.width=600;fixture.height=400;const fixtureContext=fixture.getContext('2d');
+    for(const [i,color] of ['#ff0000','#00ff00','#0000ff'].entries()){fixtureContext.fillStyle=color;fixtureContext.fillRect(i*200,0,200,400);}
+    await save({type:'uploadPhoto',id:root,values:{data:fixture.toDataURL('image/png').split(',')[1]}});
+    const media=await invoke('get_media');check(media.local.length===1,'Native photo upload');
+    const {reloadTree}=await import('/app.mjs');await reloadTree();
+    check(document.querySelectorAll('[data-person]').length===3,'Real WebView renders native data');
+    document.querySelector('[data-person="'+root+'"]').click();await wait(()=>!!document.querySelector('#person-form'));
+    check(document.querySelector('#field-given').value==='Тестовый Иван','Person editor opens');
+    document.querySelector('[data-calendar-for="field-birth"]').click();
+    check(document.querySelector('#calendar-dialog').open&&document.querySelector('.calendar-weekdays').textContent.includes('Пн'),'Russian calendar in native WebView');
+    document.querySelector('#calendar-dialog [data-close]').click();
+    document.querySelector('#field-note').value='Проверка нативной формы';document.querySelector('#field-note').dispatchEvent(new Event('input',{bubbles:true}));
+    document.querySelector('#person-form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));
+    await wait(async()=>{const t=await invoke('get_tree');return t.people[root].note==='Проверка нативной формы';});
+    tree=await invoke('get_tree');check(tree.people[root].birth==='21 MAR 19','Native form saves note without changing original date');
+    const originalPhoto=tree.people[root].photos[0],originalImage=Object.values(media.embedded)[0];
+    document.querySelector('#crop-portrait').click();await wait(()=>document.querySelector('#photo-editor').open);
+    check(document.querySelectorAll('[data-crop-preview]').length===3,'Editor shows tree, solo poster and spouse poster frames');
+    const slider=document.querySelector('#crop-zoom'),cropCanvas=document.querySelector('#crop-source');slider.value='3';slider.dispatchEvent(new Event('input',{bubbles:true}));
+    for(let i=0;i<60;i++)cropCanvas.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true}));
+    const pixel=mode=>{const c=document.querySelector('[data-crop-preview="'+mode+'"]');return c.getContext('2d').getImageData(c.width/2,c.height/2,1,1).data;};
+    check(pixel('tree')[2]>200&&pixel('poster')[1]>200,'Live previews use independent crop regions');
+    document.querySelector('[data-crop-mode="poster"]').click();slider.value='1.5';slider.dispatchEvent(new Event('input',{bubbles:true}));
+    for(let i=0;i<40;i++)cropCanvas.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowLeft',bubbles:true,cancelable:true}));
+    check(pixel('poster')[0]>200&&pixel('posterPair')[1]>200,'Solo and narrow spouse frames can be tuned separately');
+    document.querySelector('#crop-save').click();await wait(()=>!document.querySelector('#photo-editor').open);
+    tree=await invoke('get_tree');check(!!tree.people[root].photoCrops[originalPhoto].tree&&tree.people[root].portraitPhoto===originalPhoto,'Crop metadata and primary portrait saved through native IPC');
+    const savedRevision=tree.revision;document.querySelector('#crop-portrait').click();await wait(()=>document.querySelector('#photo-editor').open);slider.value='5';slider.dispatchEvent(new Event('input',{bubbles:true}));document.querySelector('#crop-cancel').click();
+    check((await invoke('get_tree')).revision===savedRevision,'Cancelling crop edits never writes settings');
+    check(Object.values((await invoke('get_media')).embedded)[0]===originalImage,'Cropping leaves original photo bytes unchanged');
+    await reloadTree();const normal=document.querySelector('.node[data-id="'+root+'"] img.avatar');await normal.decode();
+    const sample=document.createElement('canvas');sample.width=1;sample.height=1;sample.getContext('2d').drawImage(normal,normal.naturalWidth/2,normal.naturalHeight/2,1,1,0,0,1,1);
+    check(sample.getContext('2d').getImageData(0,0,1,1).data[2]>200,'Normal tree renders saved blue crop after reload');
+    document.querySelector('#both').click();check(document.querySelectorAll('.node').length>=3,'Combined layout');
+    const originalCreateURL=URL.createObjectURL,previewBlobs=new Map();
+    URL.createObjectURL=function(blob){const url=originalCreateURL.call(URL,blob);previewBlobs.set(url,blob);return url;};
+    document.querySelector('#poster-button').click();await wait(()=>document.querySelector('#poster-dialog').open&&!document.querySelector('#poster-svg').disabled);
+    await wait(()=>document.querySelector('#poster-preview').naturalWidth>0);
+    check(document.querySelector('#poster-preview').naturalWidth>0,'Native poster preview');
+    const previewSvg=await previewBlobs.get(document.querySelector('#poster-preview').src).text();
+    check(previewSvg.includes('data-poster-background="true"'),'Actual preview uses embedded user background');
+    const posterDocument=new DOMParser().parseFromString(previewSvg,'image/svg+xml'),portraitImage=[...posterDocument.querySelectorAll('image')].find(i=>!i.hasAttribute('data-poster-background'));
+    const portrait=new Image();portrait.src=portraitImage.getAttribute('href');await portrait.decode();sample.getContext('2d').drawImage(portrait,portrait.naturalWidth/2,portrait.naturalHeight/2,1,1,0,0,1,1);
+    check(sample.getContext('2d').getImageData(0,0,1,1).data[0]>200,'Exported artwork embeds the distinct red poster crop');
+    URL.createObjectURL=originalCreateURL;
+    document.querySelector('#poster-close').click();
+    const {createPosterScene,renderPosterSvg}=await import('/poster.mjs');const {layoutTree}=await import('/layout.mjs');const {svgToPng}=await import('/poster-export.mjs');
+    const {getPosterBackground}=await import('/native.mjs');const background=await getPosterBackground();
+    const scene=createPosterScene(tree,layoutTree(tree,{root,mode:'both'}));const svg=renderPosterSvg(scene,{background});
+    check(svg.includes('data-poster-background="true"')&&background.startsWith('data:image/png;base64,'),'User original artwork embedded in poster SVG');
+    check(!svg.includes('21 MAR 19')&&!svg.includes('Тестовая награда'),'Poster contains no dates or service data');
+    const png=await svgToPng(svg,scene.width,scene.height,900);check(png.type==='image/png'&&png.size>1000,'Actual WebView PNG rasterization');
+    const bg=getComputedStyle(document.querySelector('#tree-background'));check(bg.backgroundSize==='cover'&&bg.backgroundRepeat==='no-repeat','Embedded full background');
+    check(!performance.getEntriesByType('resource').some(e=>/^http:\/\/(127\.0\.0\.1|localhost):\d+/.test(e.name)),'No localhost HTTP server');
+    await invoke('smoke_complete',{result:{ok:true,passed:results.length,results}});
+  }catch(error){await invoke('smoke_complete',{result:{ok:false,error:String(error),stack:error.stack,results}});}
+})();
