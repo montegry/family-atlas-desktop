@@ -1,4 +1,4 @@
-use crate::{domain, store::Store};
+use crate::{domain, preferences, store::Store};
 use base64::{engine::general_purpose::STANDARD, Engine};
 use serde_json::{json, Value};
 use std::{
@@ -24,6 +24,14 @@ fn get_tree(state: State<AppState>) -> NativeResult<Value> {
 #[tauri::command(async)]
 fn get_media(state: State<AppState>) -> NativeResult<Value> {
     state.0.lock().map_err(failure)?.media().map_err(failure)
+}
+#[tauri::command(async)]
+fn onboarding_status(state: State<AppState>) -> NativeResult<Value> {
+    preferences::status(&state.0.lock().map_err(failure)?.directory).map_err(failure)
+}
+#[tauri::command(async)]
+fn onboarding_complete(state: State<AppState>) -> NativeResult<Value> {
+    preferences::complete(&state.0.lock().map_err(failure)?.directory).map_err(failure)
 }
 #[tauri::command(async)]
 fn get_poster_background(app: tauri::AppHandle) -> NativeResult<String> {
@@ -266,6 +274,8 @@ pub fn run() {
     let builder = builder.invoke_handler(tauri::generate_handler![
         get_tree,
         get_media,
+        onboarding_status,
+        onboarding_complete,
         get_poster_background,
         apply_action,
         import_tree,
@@ -283,6 +293,8 @@ pub fn run() {
     let builder = builder.invoke_handler(tauri::generate_handler![
         get_tree,
         get_media,
+        onboarding_status,
+        onboarding_complete,
         get_poster_background,
         apply_action,
         import_tree,

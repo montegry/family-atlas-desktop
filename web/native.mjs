@@ -5,6 +5,8 @@ export async function invoke(command,args={}) {
   try{return await globalThis.__TAURI__.core.invoke(command,args);}catch(error){throw new Error(typeof error==='string'?error:error.message||String(error));}
 }
 export const getTree=()=>invoke('get_tree');
+export const getOnboardingStatus=()=>invoke('onboarding_status');
+export const completeOnboarding=()=>invoke('onboarding_complete');
 export async function getMedia(){media=await invoke('get_media');return media;}
 export const applyAction=action=>invoke('apply_action',{action});
 export const confirmAction=message=>invoke('confirm_action',{message});

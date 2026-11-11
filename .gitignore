@@ -10,6 +10,7 @@
 /releases/
 /private/
 /test-results/
+ui-preferences.json
 .env
 .env.*
 !.env.example

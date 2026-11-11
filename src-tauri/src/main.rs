@@ -5,6 +5,7 @@ mod commands;
 mod crop_tests;
 mod domain;
 mod gedcom;
+mod preferences;
 #[cfg(test)]
 mod regression;
 mod store;

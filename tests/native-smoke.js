@@ -4,8 +4,23 @@
   const check=(ok,label)=>{if(!ok)throw new Error(label);results.push(label);};
   try{
     const wait=async p=>{const start=Date.now();while(!await p()){if(Date.now()-start>15000)throw new Error('UI timeout');await new Promise(r=>setTimeout(r,40));}};
-    await wait(()=>document.querySelector('#save-status').textContent.includes('SQLite'));
+    await wait(()=>document.body.dataset.appReady==='true');
     let tree=await invoke('get_tree');
+    const initialTutorial=await invoke('onboarding_status');
+    const tutorial=document.querySelector('#tutorial-dialog');
+    if(initialTutorial.completed){
+      check(!tutorial.open,'Restart does not automatically replay completed onboarding');
+      const before=tree.revision;document.querySelector('#help-button').click();check(tutorial.open&&tutorial.dataset.step==='welcome','Help replays tutorial after restart');
+      document.querySelector('#tutorial-close').click();await wait(()=>!tutorial.open);check((await invoke('get_tree')).revision===before,'Restart help leaves family data unchanged');
+      await invoke('smoke_complete',{result:{ok:true,restart:true,passed:results.length,results}});return;
+    }
+    check(tutorial.open&&tutorial.dataset.step==='welcome','First run automatically opens tutorial');
+    const beforeTutorial=tree.revision;document.querySelector('#tutorial-next').click();check(tutorial.dataset.step==='start','Tutorial next step');document.querySelector('#tutorial-back').click();check(tutorial.dataset.step==='welcome','Tutorial back step');
+    tutorial.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true}));check(tutorial.dataset.step==='start','Tutorial keyboard navigation');tutorial.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowLeft',bubbles:true,cancelable:true}));
+    document.querySelector('#tutorial-skip').click();await wait(()=>!tutorial.open);check((await invoke('onboarding_status')).completed,'Skipping tutorial is remembered');
+    document.querySelector('#help-button').focus();document.querySelector('#help-button').click();check(tutorial.open&&tutorial.dataset.step==='welcome','Question-mark button replays from the beginning');
+    const chapters=[...document.querySelectorAll('[data-tutorial-step]')];for(const button of chapters)button.click();check(tutorial.dataset.step==='ready','Tutorial chapters and final step');
+    document.querySelector('#tutorial-next').click();await wait(()=>!tutorial.open);await wait(()=>document.activeElement===document.querySelector('#help-button'));check(document.activeElement===document.querySelector('#help-button'),'Tutorial restores keyboard focus');check((await invoke('get_tree')).revision===beforeTutorial,'Tutorial never changes family data');
     const save=async action=>tree=await invoke('apply_action',{action:{...action,revision:tree.revision}});
     await save({type:'person',values:{given:'Тестовый Иван',surname:'Проверкин',birth:'21 MAR 19'}});
     const root=tree.editedId;
@@ -28,6 +43,7 @@
     check(document.querySelector('#calendar-dialog').open&&document.querySelector('.calendar-weekdays').textContent.includes('Пн'),'Russian calendar in native WebView');
     document.querySelector('#calendar-dialog [data-close]').click();
     document.querySelector('#field-note').value='Проверка нативной формы';document.querySelector('#field-note').dispatchEvent(new Event('input',{bubbles:true}));
+    document.querySelector('#help-button').click();check(tutorial.open,'Help opens while a form has unsaved changes');tutorial.dispatchEvent(new Event('cancel',{cancelable:true}));await wait(()=>!tutorial.open);check(!tutorial.open,'Escape/cancel closes help');check(document.querySelector('#field-note').value==='Проверка нативной формы','Closing help preserves the unsaved form');
     document.querySelector('#person-form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));
     await wait(async()=>{const t=await invoke('get_tree');return t.people[root].note==='Проверка нативной формы';});
     tree=await invoke('get_tree');check(tree.people[root].birth==='21 MAR 19','Native form saves note without changing original date');

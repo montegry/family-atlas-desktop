@@ -7,12 +7,13 @@
   <link rel="icon" href="/app-icon.png" type="image/png">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/photo-editor.css">
+  <link rel="stylesheet" href="/tutorial.css">
   <script type="module" src="/app.mjs"></script>
 </head>
 <body>
   <header class="topbar">
     <div class="brand"><span class="brand-mark">♧</span><div><h1>Семейный атлас</h1><p>ИСТОРИЯ, КОТОРАЯ НАС ОБЪЕДИНЯЕТ</p></div></div>
-    <div class="header-actions"><span id="save-status" class="status">SQLite · запуск…</span><details class="file-menu"><summary class="button quiet">Файлы</summary><div><button id="import-button">Импорт JSON / GEDCOM</button><button id="import-project">Перенести проект с фотографиями</button><button id="export-json">Сохранить JSON…</button><button id="export-ged">Сохранить GEDCOM…</button><button id="export-project">Полная копия с фотографиями…</button><button id="storage-info">Расположение данных</button></div></details><button id="new-person" class="primary">+ Человек</button></div>
+    <div class="header-actions"><span id="save-status" class="status">SQLite · запуск…</span><button id="help-button" class="help-button" type="button" title="Обучение работе с программой" aria-label="Открыть обучение" aria-haspopup="dialog">?</button><details class="file-menu"><summary class="button quiet">Файлы</summary><div><button id="import-button">Импорт JSON / GEDCOM</button><button id="import-project">Перенести проект с фотографиями</button><button id="export-json">Сохранить JSON…</button><button id="export-ged">Сохранить GEDCOM…</button><button id="export-project">Полная копия с фотографиями…</button><button id="storage-info">Расположение данных</button></div></details><button id="new-person" class="primary">+ Человек</button></div>
   </header>
   <main>
     <aside class="directory">

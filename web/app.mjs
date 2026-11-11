@@ -4,6 +4,8 @@ import {formatDate} from './dates.mjs';
 import {mountDateFields, dateFormValues, dateValue, safeDateValue} from './date-picker.mjs';
 import {militarySummary, militaryBadge, sourceLinks} from './military.mjs';
 import {mountPosterExport} from './poster-export.mjs';
+import {mountTutorial} from './tutorial.mjs';
+import {getOnboardingStatus,completeOnboarding} from './native.mjs';
 import {mountPhotoEditor} from './photo-editor.mjs';
 import {portraitReference} from './photo-crop.mjs';
 import {preparePortraits,treePortraitUrl} from './photo-render.mjs';
@@ -280,6 +282,7 @@ $('#storage-info').addEventListener('click',async()=>{try{const info=await invok
 document.addEventListener('click',async event=>{const link=event.target.closest('a[href]');if(!link)return;const href=link.getAttribute('href');event.preventDefault();try{if(/^https?:\/\//.test(href))await invoke('open_source',{url:href});else if(href==='/eras/index.html')await invoke('open_gallery');}catch(error){toast(error.message);}});
 window.addEventListener('beforeunload',e=>{if(currentFormDirty){e.preventDefault();e.returnValue='';}});
 window.addEventListener('resize',transform);
+const tutorial=mountTutorial({button:$('#help-button'),getStatus:getOnboardingStatus,complete:completeOnboarding,notify:toast});
 const photoEditor=mountPhotoEditor({onDirty:markDirty,onSave:async(id,values)=>{const result=await save({type:'cropPhoto',id,values});if(result)await openPerson(id,true);return !!result;}});
 mountPosterExport({button:$('#poster-button'),dialog:$('#poster-dialog'),
   getSnapshot:()=>({data,layout,all,rootName:data?.people[root]?displayName(data.people[root]):'Наше древо'}),
@@ -298,3 +301,5 @@ export async function reloadTree() {
   }catch(error){$('#tree-description').textContent='Ошибка загрузки: '+error.message;toast(error.message);throw error;}
 }
 await reloadTree();
+await tutorial.startIfNeeded();
+document.body.dataset.appReady='true';
